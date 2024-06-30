@@ -2,7 +2,7 @@ const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
 
 
-const Usuario = require('../models');
+const {Usuario} = require('../models');
 
 
 
@@ -16,14 +16,22 @@ const usuariosGet = async (req = request, res = response) => {
         Usuario.find(query)
             .skip(Number(desde))
             .limit(Number(limite))
-    ])
+    ]);
 
     res.json({
         total,
         usuarios
     });
 
-}
+};
+
+const usuariosGetById = async (req, res = response) => {
+    const id = req.params.id;
+
+    const usuario = await Usuario.findById(id);
+
+    res.json(usuario);
+};
 
 const usuariosPut = async (req = request, res = response) => {
 
@@ -76,4 +84,5 @@ module.exports = {
     usuariosPut,
     usuariosPost,
     usuariosDelete,
+    usuariosGetById
 }
