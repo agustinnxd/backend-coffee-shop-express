@@ -7,19 +7,19 @@ const { existeCategoriaPorId, productoExiste, existeProductoPorId } = require('.
 
 const router = Router();
 
-//localhost:8080/api.categorias
+//localhost:8080/api.productos
 
-// obtener todas las categorias - publico
+// obtener todas las productos - publico
 router.get('/', productoGet);
 
-// obtener una categoria por id - publico
+// obtener una producto por id - publico
 router.get('/:id', [
     check('id', 'No es un id válido').isMongoId(),
     check('id').custom( existeProductoPorId ),
     validarCampos
 ],productoGetById);
 
-// crear categoria - privado - cualquier persona con un token valido
+// crear producto - privado - cualquier persona con un token valido
 router.post('/', [
     validarJWT,
     check('name', 'El nombre es necesario').not().isEmpty(),
