@@ -28,8 +28,6 @@ const categoriasGetById = async (req= request, res = response) => {
 
     const categoria = await Categoria.findById(id).populate("user");
 
-    console.log(categoria);
-
     res.json({
         categoria
     });
@@ -41,6 +39,7 @@ const categoriasPost = async (req = request, res = response) => {
 
     const categoriaDB = await Categoria.findOne({name});
 
+    // Verificar si la categoria ya existe
     if(categoriaDB) {
         return res.status(400).json({
             msg: `La categoria ${categoriaDB.name} ya existe`
