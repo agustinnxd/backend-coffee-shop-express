@@ -60,6 +60,17 @@ const existeProductoPorId = async (id = '') => {
     }
 }
 
+// Validar colecciones
+
+const coleccionesPermitidas = ( coleccion = '', colecciones = [] ) => {
+    
+    if(!colecciones.includes(coleccion)){
+        throw new Error(`La colección ${coleccion} no existe - ${colecciones}`)
+    };
+
+    return true;
+};
+
 
 
 module.exports = {
@@ -69,5 +80,6 @@ module.exports = {
     existeCategoriaPorId,
     categoriaExiste,
     productoExiste,
-    existeProductoPorId
+    existeProductoPorId,
+    coleccionesPermitidas
 }
